@@ -5,20 +5,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import edu.ssafy.dto.MemDTO;
+import edu.ssafy.dto.MemberDTO;
 
 @Repository("MemberRepositoryImpl")
 public class MemberRepositoryImpl implements MemberRepository{
-	private List<MemDTO> list = new ArrayList<MemDTO>();
+	private List<MemberDTO> list = new ArrayList<MemberDTO>();
 	
 	public MemberRepositoryImpl() {
 	}
 	
-	public void insert(MemDTO m) {
+	public void insert(MemberDTO m) {
 		list.add(m);
 	}
 	
-	public void update(MemDTO m) {
+	public void update(MemberDTO m) {
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getId().equals(m.getId())) {
 				list.set(i, m);
@@ -36,7 +36,7 @@ public class MemberRepositoryImpl implements MemberRepository{
 		}
 	}
 	
-	public MemDTO selectOne(String m) {
+	public MemberDTO selectOne(String m) {
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getId().equals(m)) {
 				return list.get(i);
@@ -45,7 +45,7 @@ public class MemberRepositoryImpl implements MemberRepository{
 		return null;
 	}
 	
-	public List<MemDTO> selectList(){
+	public List<MemberDTO> selectList(){
 		return list;
 	}
 

@@ -2,7 +2,7 @@ package edu.ssafy.dto;
 
 import java.io.Serializable;
 
-public class MemDTO implements Serializable{
+public class MemberDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -11,10 +11,10 @@ public class MemDTO implements Serializable{
 	private String name;
 	private String tel;
 	
-	public MemDTO() {
+	public MemberDTO() {
 	}
 	
-	public MemDTO(String id, String pw, String name, String tel) {
+	public MemberDTO(String id, String pw, String name, String tel) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;

@@ -8,12 +8,12 @@ public class ProductDTO implements Serializable{
 
 	private String num;
 	private String name;
-	private String price;
+	private int price;
 	
 	public ProductDTO() {
 	}
 
-	public ProductDTO(String num, String name, String price) {
+	public ProductDTO(String num, String name, int price) {
 		this.num = num;
 		this.name = name;
 		this.price = price;
@@ -35,11 +35,11 @@ public class ProductDTO implements Serializable{
 		this.name = name;
 	}
 
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

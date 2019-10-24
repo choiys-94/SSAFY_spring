@@ -10,11 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.ssafy.dto.MemDTO;
+import edu.ssafy.dto.MemberDTO;
+import edu.ssafy.exception.MyException;
 import edu.ssafy.service.MemberService;
 
 @Controller
@@ -23,6 +25,18 @@ public class MemberController {
 	
 	@Autowired
 	MemberService ser;
+
+	@ExceptionHandler(MyException.class)
+	public String myException(HttpServletRequest req, Exception e) {
+		req.setAttribute("message", e.getMessage());
+		return "myErrorPage";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public String allException(HttpServletRequest req, Exception e) {
+		req.setAttribute("message", e.getMessage());
+		return "allErrorPage";
+	}
 	
 	@RequestMapping("/memregpage")
 	public String memRegPage(){
@@ -30,7 +44,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memreg")
-	public ModelAndView memReg(HttpServletRequest req, ModelAndView mv){
+	public ModelAndView memReg(HttpServletRequest req, ModelAndView mv) throws MyException{
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		String name  = req.getParameter("name");
@@ -43,7 +57,7 @@ public class MemberController {
 	
 	@RequestMapping("/memlist")
 	public ModelAndView memList(ModelAndView mv){
-		List<MemDTO> list = ser.selectList();
+		List<MemberDTO> list = ser.selectList();
 		mv.addObject("mems", list);
 		mv.setViewName("/member/memlist");
 		return mv;
@@ -52,7 +66,7 @@ public class MemberController {
 	@RequestMapping("/memview")
 	public ModelAndView memView(@RequestParam("id") String id, ModelAndView mv){
 //		String id = req.getParameter("id");
-		MemDTO mem = ser.selectOne(id);
+		MemberDTO mem = ser.selectOne(id);
 		mv.addObject("mem", mem);
 		mv.setViewName("/member/memview");
 		return mv;
@@ -66,7 +80,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memupdate")
-	public ModelAndView memUpdate(MemDTO mem, ModelAndView mv){
+	public ModelAndView memUpdate(MemberDTO mem, ModelAndView mv){
 		ser.update(mem.getId(), mem.getPw(), mem.getName(), mem.getTel());
 		mv.setViewName("redirect:memlist");
 		return mv;

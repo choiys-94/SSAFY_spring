@@ -5,41 +5,49 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.ssafy.dto.MemDTO;
+import edu.ssafy.dto.MemberDTO;
+import edu.ssafy.exception.MyException;
 import edu.ssafy.repository.MemberRepository;
 
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
-	@Qualifier("MemberRepositoryImpl")
+	@Qualifier("MemberMybatisRepositoryImpl")
 	MemberRepository repo;
 
 	public MemberServiceImpl() {
 	}
 	
 	@Override
-	public void insert(String id, String pw, String name, String tel) {
-		repo.insert(new MemDTO(id, pw, name, tel));
+	@Transactional
+	public void insert(String id, String pw, String name, String tel) throws MyException {
+		repo.insert(new MemberDTO(id, pw, name, tel));
+		repo.insert(new MemberDTO(id, pw, name, tel));
+		repo.insert(new MemberDTO(id, pw, name, tel));
+		repo.insert(new MemberDTO(id, pw, name, tel));
 	}
 
 	@Override
+	@Transactional
 	public void update(String id, String pw, String name, String tel) {
-		repo.update(new MemDTO(id, pw, name, tel));		
+		repo.update(new MemberDTO(id, pw, name, tel));		
 	}
 
 	@Override
+	@Transactional
 	public void delete(String id) {
 		repo.delete(id);		
 	}
 
 	@Override
-	public MemDTO selectOne(String id) {
+	public MemberDTO selectOne(String id) {
 		return repo.selectOne(id);
 	}
 
 	@Override
-	public List<MemDTO> selectList() {
+	public List<MemberDTO> selectList() {
 		return repo.selectList();
 	}
 

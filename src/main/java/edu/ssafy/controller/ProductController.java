@@ -57,8 +57,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/proupdate")
-	public ModelAndView memUpdate(ProductDTO mem, ModelAndView mv){
-		ser.update(mem.getNum(), mem.getName(), mem.getPrice());
+	public ModelAndView memUpdate(ProductDTO pro, ModelAndView mv){
+		ser.update(pro.getNum(), pro.getName(), pro.getPrice());
 		mv.setViewName("redirect:prolist");
 		return mv;
 	}

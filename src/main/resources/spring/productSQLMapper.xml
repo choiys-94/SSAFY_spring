@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ssafy.product">
+	<insert id="insert" parameterType="ProductDTO">
+		insert into product(num, name, price) values(#{num}, #{name}, #{price})
+	</insert>
+	
+	<update id="update" parameterType="ProductDTO">
+		update product set name=#{name}, price=#{price} where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete from product where num=#{num}
+	</delete>
+	
+	<select id="selectOne" parameterType="string" resultType="ProductDTO">
+		select num, name, price from product where num=#{num}
+	</select>
+	
+	<select id="selectList" resultType="ProductDTO">
+		select num, name, price from product
+	</select>
+</mapper>
