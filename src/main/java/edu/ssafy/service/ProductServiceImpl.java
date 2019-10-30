@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.ssafy.dto.ProductDTO;
 import edu.ssafy.repository.ProductRepository;
 
-@Service
+@Service("ProductServiceImpl")
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	@Qualifier("ProductMybatisRepositoryImpl")

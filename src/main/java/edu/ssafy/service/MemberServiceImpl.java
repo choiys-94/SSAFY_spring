@@ -11,7 +11,7 @@ import edu.ssafy.dto.MemberDTO;
 import edu.ssafy.exception.MyException;
 import edu.ssafy.repository.MemberRepository;
 
-@Service
+@Service("MemberServiceImpl")
 public class MemberServiceImpl implements MemberService{
 	@Autowired
 	@Qualifier("MemberMybatisRepositoryImpl")
