@@ -108,11 +108,12 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest req, @RequestParam("id") String id, @RequestParam("pw") String pw, ModelAndView mv) {
-		if(ser.isLogin(id, pw)) {
-			mv.addObject("islogin", "1");
-			req.getSession().setAttribute("userid", id);
-		}
-		else {
+		try {
+			if(ser.isLogin(id, pw)) {
+				mv.addObject("islogin", "1");
+				req.getSession().setAttribute("userid", id);
+			}
+		} catch (Exception e) {
 			mv.addObject("islogin", "0");
 		}
 		
