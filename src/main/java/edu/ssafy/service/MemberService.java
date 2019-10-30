@@ -6,9 +6,9 @@ import edu.ssafy.dto.MemberDTO;
 import edu.ssafy.exception.MyException;
 
 public interface MemberService {
-	public void insert(String id, String pw, String name, String tel)  throws MyException;
-	public void update(String id, String pw, String name, String tel);
-	public void delete(String id);
+	public int insert(String id, String pw, String name, String tel)  throws MyException;
+	public int update(String id, String pw, String name, String tel);
+	public int delete(String id);
 	public MemberDTO selectOne(String id);
 	public List<MemberDTO> selectList();
 	public boolean isLogin(String id, String pw);

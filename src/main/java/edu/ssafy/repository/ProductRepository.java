@@ -5,9 +5,9 @@ import java.util.List;
 import edu.ssafy.dto.ProductDTO;
 
 public interface ProductRepository {
-	public void insert(ProductDTO p);
-	public void update(ProductDTO p);
-	public void delete(String num);
+	public int insert(ProductDTO p);
+	public int update(ProductDTO p);
+	public int delete(String num);
 	public ProductDTO selectOne(String num);
 	public List<ProductDTO> selectList();
 }

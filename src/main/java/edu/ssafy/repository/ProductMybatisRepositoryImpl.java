@@ -14,18 +14,18 @@ public class ProductMybatisRepositoryImpl implements ProductRepository{
 	SqlSession session;
 	
 	@Override
-	public void insert(ProductDTO p) {
-		session.insert("ssafy.product.insert", p);
+	public int insert(ProductDTO p) {
+		return session.insert("ssafy.product.insert", p);
 	}
 
 	@Override
-	public void update(ProductDTO p) {
-		session.update("ssafy.product.update", p);
+	public int update(ProductDTO p) {
+		return session.update("ssafy.product.update", p);
 	}
 
 	@Override
-	public void delete(String num) {
-		session.delete("ssafy.product.delete", num);
+	public int delete(String num) {
+		return session.delete("ssafy.product.delete", num);
 	}
 
 	@Override

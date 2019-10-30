@@ -17,18 +17,18 @@ public class MemberMybatisRepositoryImpl implements MemberRepository {
 	SqlSession session;
 	
 	@Override
-	public void insert(MemberDTO m) throws MyException {
-		session.insert("ssafy.member.insert", m);
+	public int insert(MemberDTO m) throws MyException {
+		return session.insert("ssafy.member.insert", m);
 	}
 
 	@Override
-	public void update(MemberDTO m) {
-		session.update("ssafy.member.update", m);
+	public int update(MemberDTO m) {
+		return session.update("ssafy.member.update", m);
 	}
 
 	@Override
-	public void delete(String m) {
-		session.delete("ssafy.member.delete", m);
+	public int delete(String m) {
+		return session.delete("ssafy.member.delete", m);
 	}
 
 	@Override

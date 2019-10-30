@@ -22,23 +22,20 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	@Transactional
-	public void insert(String id, String pw, String name, String tel) throws MyException {
-		repo.insert(new MemberDTO(id, pw, name, tel));
-		repo.insert(new MemberDTO(id, pw, name, tel));
-		repo.insert(new MemberDTO(id, pw, name, tel));
-		repo.insert(new MemberDTO(id, pw, name, tel));
+	public int insert(String id, String pw, String name, String tel) throws MyException {
+		return repo.insert(new MemberDTO(id, pw, name, tel));
 	}
 
 	@Override
 	@Transactional
-	public void update(String id, String pw, String name, String tel) {
-		repo.update(new MemberDTO(id, pw, name, tel));		
+	public int update(String id, String pw, String name, String tel) {
+		return repo.update(new MemberDTO(id, pw, name, tel));		
 	}
 
 	@Override
 	@Transactional
-	public void delete(String id) {
-		repo.delete(id);		
+	public int delete(String id) {
+		return repo.delete(id);		
 	}
 
 	@Override

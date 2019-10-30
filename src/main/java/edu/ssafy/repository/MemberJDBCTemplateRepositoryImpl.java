@@ -21,21 +21,21 @@ public class MemberJDBCTemplateRepositoryImpl implements MemberRepository{
 	private JdbcTemplate jt;
 	
 	@Override
-	public void insert(MemberDTO m) throws MyException {
+	public int insert(MemberDTO m) throws MyException {
 		String sql = "insert into members(id, pw, name, tel) values (?, ?, ?, ?)";
-		jt.update(sql, new Object[] {m.getId(), m.getPw(), m.getName(), m.getTel()});
+		return jt.update(sql, new Object[] {m.getId(), m.getPw(), m.getName(), m.getTel()});
 	}
 
 	@Override
-	public void update(MemberDTO m) {
+	public int update(MemberDTO m) {
 		String sql = "update members set pw=?, name=?, tel=? where id=?";
-		jt.update(sql, new Object[] {m.getPw(), m.getName(), m.getTel(), m.getId()});		
+		return jt.update(sql, new Object[] {m.getPw(), m.getName(), m.getTel(), m.getId()});		
 	}
 
 	@Override
-	public void delete(String m) {
+	public int delete(String m) {
 		String sql = "delete from members where id=?";
-		jt.update(sql, new Object[] {m});
+		return jt.update(sql, new Object[] {m});
 	}
 
 	class MemberMapper implements RowMapper<MemberDTO>{

@@ -18,20 +18,20 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	@Transactional
-	public void insert(String num, String name, int price) {
-		repo.insert(new ProductDTO(num, name, price));
+	public int insert(String num, String name, int price) {
+		return repo.insert(new ProductDTO(num, name, price));
 	}
 	
 	@Override
 	@Transactional
-	public void update(String num, String name, int price) {
-		repo.update(new ProductDTO(num, name, price));
+	public int update(String num, String name, int price) {
+		return repo.update(new ProductDTO(num, name, price));
 	}
 	
 	@Override
 	@Transactional
-	public void delete(String num) {
-		repo.delete(num);
+	public int delete(String num) {
+		return repo.delete(num);
 	}
 	
 	@Override

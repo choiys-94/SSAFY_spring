@@ -49,9 +49,15 @@ public class MemberController {
 		String pw = req.getParameter("pw");
 		String name  = req.getParameter("name");
 		String tel = req.getParameter("tel");
-		ser.insert(id, pw, name, tel);
+		try {
+			int insert = ser.insert(id, pw, name, tel);
+			mv.addObject("cnt", insert);
+			mv.setViewName("redirect:memlist");
+		} catch(RuntimeException e) {
+			mv.addObject("message", e.getMessage());
+			mv.setViewName("allErrorPage");
+		}
 		
-		mv.setViewName("redirect:memlist");
 		return mv;
 	}
 	
@@ -74,15 +80,28 @@ public class MemberController {
 	
 	@RequestMapping("/memdelete")
 	public ModelAndView memDelete(@RequestParam("id") String id, ModelAndView mv){
-		ser.delete(id);
-		mv.setViewName("redirect:memlist");
+		try {
+			int delete = ser.delete(id);
+			mv.addObject("cnt", delete);
+			mv.setViewName("redirect:memlist");
+		} catch(RuntimeException e) {
+			mv.addObject("message", e.getMessage());
+			mv.setViewName("allErrorPage");
+		}
+		
 		return mv;
 	}
 	
 	@RequestMapping("/memupdate")
 	public ModelAndView memUpdate(MemberDTO mem, ModelAndView mv){
-		ser.update(mem.getId(), mem.getPw(), mem.getName(), mem.getTel());
-		mv.setViewName("redirect:memlist");
+		try {
+			int update = ser.update(mem.getId(), mem.getPw(), mem.getName(), mem.getTel());
+			mv.addObject("cnt", update);
+			mv.setViewName("redirect:memlist");
+		} catch(RuntimeException e) {
+			mv.addObject("message", e.getMessage());
+			mv.setViewName("allErrorPage");
+		}
 		return mv;
 	}
 	

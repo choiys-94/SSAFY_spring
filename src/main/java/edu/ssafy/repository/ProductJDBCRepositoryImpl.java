@@ -16,7 +16,7 @@ import edu.ssafy.util.JDBCProxy;
 public class ProductJDBCRepositoryImpl implements ProductRepository{
 
 	@Override
-	public void insert(ProductDTO m) {
+	public int insert(ProductDTO m) {
 		Connection conn = JDBCProxy.getConnection();
 		PreparedStatement st = null;
 		try {
@@ -25,17 +25,18 @@ public class ProductJDBCRepositoryImpl implements ProductRepository{
 			st.setString(1, m.getNum());
 			st.setString(2, m.getName());
 			st.setInt(3, m.getPrice());
-			st.executeUpdate();
+			return st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL Error!");
+			return 0;
 		} finally {
 			JDBCProxy.close(conn, st);
 		}
 	}
 
 	@Override
-	public void update(ProductDTO m) {
+	public int update(ProductDTO m) {
 		Connection conn = JDBCProxy.getConnection();
 		PreparedStatement st = null;
 		try {
@@ -44,27 +45,29 @@ public class ProductJDBCRepositoryImpl implements ProductRepository{
 			st.setString(1, m.getName());
 			st.setInt(2, m.getPrice());
 			st.setString(3, m.getNum());
-			st.executeUpdate();
+			return st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL Error!");
+			return 0;
 		} finally {
 			JDBCProxy.close(conn, st);
 		}
 	}
 
 	@Override
-	public void delete(String m) {
+	public int delete(String m) {
 		Connection conn = JDBCProxy.getConnection();
 		PreparedStatement st = null;
 		try {
 			String sql = "delete from product where num=?";
 			st = conn.prepareStatement(sql);
 			st.setString(1, m);
-			st.executeUpdate();
+			return st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL Error!");
+			return 0;
 		} finally {
 			JDBCProxy.close(conn, st);
 		}

@@ -23,7 +23,7 @@ public class MemberDataSourceRepositoryImpl implements MemberRepository{
 	private DataSource ds;
 	
 	@Override
-	public void insert(MemberDTO m) throws MyException{
+	public int insert(MemberDTO m) throws MyException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		try {
@@ -34,18 +34,18 @@ public class MemberDataSourceRepositoryImpl implements MemberRepository{
 			st.setString(2, m.getPw());
 			st.setString(3, m.getName());
 			st.setString(4, m.getTel());
-			st.executeUpdate();
+			return st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL Error!");
-			throw new MyException(e.getMessage());
+			return 0;
 		} finally {
 			JDBCProxy.close(conn, st);
 		}
 	}
 
 	@Override
-	public void update(MemberDTO m) {
+	public int update(MemberDTO m) {
 		Connection conn = null;
 		PreparedStatement st = null;
 		try {
@@ -56,17 +56,18 @@ public class MemberDataSourceRepositoryImpl implements MemberRepository{
 			st.setString(2, m.getName());
 			st.setString(3, m.getTel());
 			st.setString(4, m.getId());
-			st.executeUpdate();
+			return st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL Error!");
+			return 0;
 		} finally {
 			JDBCProxy.close(conn, st);
 		}
 	}
 
 	@Override
-	public void delete(String m) {
+	public int delete(String m) {
 		Connection conn = null;
 		PreparedStatement st = null;
 		try {
@@ -74,10 +75,11 @@ public class MemberDataSourceRepositoryImpl implements MemberRepository{
 			String sql = "delete from members where id=?";
 			st = conn.prepareStatement(sql);
 			st.setString(1, m);
-			st.executeUpdate();
+			return st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL Error!");
+			return 0;
 		} finally {
 			JDBCProxy.close(conn, st);
 		}

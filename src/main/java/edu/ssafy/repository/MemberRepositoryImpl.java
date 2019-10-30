@@ -14,26 +14,31 @@ public class MemberRepositoryImpl implements MemberRepository{
 	public MemberRepositoryImpl() {
 	}
 	
-	public void insert(MemberDTO m) {
-		list.add(m);
+	public int insert(MemberDTO m) {
+		if(list.add(m))
+			return 1;
+		
+		return 0;
 	}
 	
-	public void update(MemberDTO m) {
+	public int update(MemberDTO m) {
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getId().equals(m.getId())) {
 				list.set(i, m);
-				break;
+				return i;
 			}
 		}
+		return 0;
 	}
 	
-	public void delete(String m) {
+	public int delete(String m) {
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getId().equals(m)) {
 				list.remove(i);
-				break;
+				return i;
 			}
 		}
+		return 0;
 	}
 	
 	public MemberDTO selectOne(String m) {
